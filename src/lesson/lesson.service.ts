@@ -1,3 +1,4 @@
+import { CreateLessonInput } from './lesson.input';
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -19,7 +20,8 @@ export class LessonService {
     }
   }
 
-  async createLesson(name, startDate, endDate): Promise<Lesson> {
+  async createLesson(createLessonInput: CreateLessonInput): Promise<Lesson> {
+    const { name, startDate, endDate } = createLessonInput;
     try {
       const lesson = this.lessonRepository.create({
         id: uuid(),
