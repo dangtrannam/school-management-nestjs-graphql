@@ -20,6 +20,14 @@ export class LessonService {
     }
   }
 
+  async getLessons(): Promise<Lesson[]> {
+    try {
+      return await this.lessonRepository.find();
+    } catch (error) {
+      throw new InternalServerErrorException();
+    }
+  }
+
   async createLesson(createLessonInput: CreateLessonInput): Promise<Lesson> {
     const { name, startDate, endDate } = createLessonInput;
     try {
